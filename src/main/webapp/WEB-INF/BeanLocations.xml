@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	
+	
+	<!-- <bean id="LocalFileSystemMultipleRootDao" class="fr.aeris.commons.dao.impl.opensearch.LocalFileSystemMultipleRootCachedImpl">
+		<property name="configFileName" value="/export/local/tomcat-aeris/apache-tomcat-6.0.35/webapps/opensearch/WEB-INF/collectionsFile.properties" />
+	</bean> -->
+	
+	<bean id="LocalFileSystemMultipleRootDaoDev" class="fr.aeris.commons.dao.impl.opensearch.LocalFileSystemMultipleRootCachedImpl">
+		<property name="configFileName" value="/home/klein/workspace/opensearch-service/src/main/webapp/WEB-INF/collectionsFile_dev.properties" />
+	</bean>
+	
+	<alias name="LocalFileSystemMultipleRootDaoDev" alias="collectionDao"/>
+	
+	<bean id="cacheCleaner" class="fr.aeris.commons.utils.CacheCleaner">
+		<property name="secret" value="S3d00" />
+		<property name="cleanables">
+			<list>
+				<ref bean="collectionDao"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="fileSystemDao" class="fr.aeris.commons.dao.impl.filesystem.FileSystemDAOImpl">
+		<property name="baseDirectory" value="/www/demo" />
+		<property name="imgBaseDirectory" value="/www/images" />
+	</bean>
+	
+	<bean id="calendarDao" class="fr.aeris.commons.dao.impl.calendar.CalendarDAOSingleRootImpl">
+		<property name="root" value="/home/klein/Documents/rootFolder" />
+		<property name="template" value="${date}_${sat}_${type}_${time}.jpg" />
+		<property name="numFiles" value="#{new Integer(5)}" />
+	</bean>
+
+	
+	<context:component-scan base-package="fr.aeris" />		
+	<context:annotation-config />
+	<tx:annotation-driven />
+	<task:annotation-driven />
+
+</beans>
