@@ -7,12 +7,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 	
 	
-	<!-- <bean id="LocalFileSystemMultipleRootDao" class="fr.aeris.commons.dao.impl.quicklooks.LocalFileSystemMultipleRootCachedImpl">
+	<!-- <bean id="LocalFileSystemMultipleRootDao" class="fr.aeris.commons.dao.impl.opensearch.LocalFileSystemMultipleRootCachedImpl">
 		<property name="configFileName" value="/export/local/tomcat-aeris/apache-tomcat-6.0.35/webapps/opensearch/WEB-INF/collectionsFile.properties" />
 	</bean> -->
 	
-	<bean id="LocalFileSystemMultipleRootDaoDev" class="fr.aeris.commons.dao.impl.quicklooks.LocalFileSystemMultipleRootCachedImpl">
-		<property name="configFileName" value="/home/klein/workspace/opensearch-service/src/main/webapp/WEB-INF/collectionsFile_dev.properties" />
+	<bean id="LocalFileSystemMultipleRootDaoDev" class="fr.aeris.commons.dao.impl.opensearch.LocalFileSystemMultipleRootCachedImpl">
+		<property name="configFileName" value="C:/Users/Greg/Travail/Aeris/eclipse/aeris-opensearch-service/src/main/webapp/WEB-INF/collectionsFile_dev.properties" />
 	</bean>
 	
 	<alias name="LocalFileSystemMultipleRootDaoDev" alias="collectionDao"/>
@@ -27,12 +27,12 @@
 	</bean>
 	
 	<bean id="fileSystemDao" class="fr.aeris.commons.dao.impl.filesystem.FileSystemDAOImpl">
-		<property name="baseDirectory" value="/home/klein" />
-		<property name="imgBaseDirectory" value="/home/klein/images" />
+		<property name="baseDirectory" value="C:/Users/Greg/Travail/Aeris/eclipse/test" />
+		<property name="imgBaseDirectory" value="C:/Users/Greg/Travail/Aeris/eclipse/test" />
 	</bean>
 	
 	<bean id="calendarDao" class="fr.aeris.commons.dao.impl.calendar.CalendarDAOSingleRootImpl">
-		<property name="root" value="/home/klein/Documents/rootFolder" />
+		<property name="root" value="C:/Users/Greg/Travail/Aeris/eclipse/test" />
 		<property name="template" value="${date}_${sat}_${type}_${time}.jpg" />
 		<property name="numFiles" value="#{new Integer(5)}" />
 	</bean>
